@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#1d1720">
   <title>Une surprise pour toi 🎁</title>
+
   <style>
     :root{
       --bg:#17131a;
@@ -14,8 +15,15 @@
       --wine:#7c2946;
       --ink:#29232a;
     }
+
     *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Georgia,"Times New Roman",serif}
+
+    html,body{
+      margin:0;
+      min-height:100%;
+      font-family:Georgia,"Times New Roman",serif;
+    }
+
     body{
       background:
         radial-gradient(circle at 50% 15%, rgba(215,173,99,.16), transparent 30%),
@@ -23,7 +31,9 @@
       color:#fff;
       overflow-x:hidden;
     }
+
     button{font:inherit}
+
     .screen{
       min-height:100vh;
       min-height:100svh;
@@ -35,244 +45,823 @@
       overflow:hidden;
     }
 
-    /* INTRO */
-    #intro{transition:opacity .7s ease, transform .7s ease}
-    #intro.hidden{opacity:0;transform:scale(1.04);pointer-events:none;position:absolute;inset:0}
-    .intro-content{text-align:center;position:relative;z-index:2}
-    .eyebrow{
-      letter-spacing:.2em;text-transform:uppercase;font-size:.72rem;
-      color:var(--gold-light);margin-bottom:18px
+    /* =========================
+       ÉCRAN DU CADEAU
+       ========================= */
+
+    #intro{
+      transition:opacity .7s ease, transform .7s ease;
     }
-    h1{font-size:clamp(2rem,8vw,4rem);line-height:1.05;margin:0 0 10px;font-weight:400}
-    .intro-sub{color:#d8cfd6;margin:0 0 35px;font-size:1rem}
+
+    #intro.hidden{
+      opacity:0;
+      transform:scale(1.04);
+      pointer-events:none;
+      position:absolute;
+      inset:0;
+    }
+
+    .intro-content{
+      text-align:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .eyebrow{
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      font-size:.72rem;
+      color:var(--gold-light);
+      margin-bottom:18px;
+    }
+
+    h1{
+      font-size:clamp(2rem,8vw,4rem);
+      line-height:1.05;
+      margin:0 0 10px;
+      font-weight:400;
+    }
+
+    .intro-sub{
+      color:#d8cfd6;
+      margin:0 0 35px;
+      font-size:1rem;
+    }
+
     .gift-button{
-      border:0;background:none;color:white;cursor:pointer;
-      display:flex;flex-direction:column;align-items:center;gap:18px;
+      border:0;
+      background:none;
+      color:white;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
       margin:auto;
     }
+
     .gift{
-      width:180px;height:150px;position:relative;
+      width:180px;
+      height:150px;
+      position:relative;
       filter:drop-shadow(0 22px 25px rgba(0,0,0,.35));
       animation:float 3s ease-in-out infinite;
     }
+
     .gift-box{
-      position:absolute;left:12px;right:12px;bottom:0;height:105px;
+      position:absolute;
+      left:12px;
+      right:12px;
+      bottom:0;
+      height:105px;
       background:linear-gradient(90deg,#8f2e4f,#a83a5c 50%,#812640);
       border-radius:5px 5px 12px 12px;
       box-shadow:inset 0 0 0 1px rgba(255,255,255,.13);
     }
+
     .gift-lid{
-      position:absolute;left:2px;right:2px;top:34px;height:35px;
+      position:absolute;
+      left:2px;
+      right:2px;
+      top:34px;
+      height:35px;
       background:linear-gradient(90deg,#a63a5d,#c14b6b 50%,#96314f);
-      border-radius:6px;z-index:4;
+      border-radius:6px;
+      z-index:4;
       transform-origin:12% 90%;
       transition:transform .85s cubic-bezier(.2,.8,.2,1), top .85s;
     }
+
     .ribbon-v{
-      position:absolute;left:50%;transform:translateX(-50%);
-      top:34px;bottom:0;width:25px;background:linear-gradient(90deg,#d2a34f,#f1d18a,#c3933f);
-      z-index:5;border-radius:2px;
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      top:34px;
+      bottom:0;
+      width:25px;
+      background:linear-gradient(90deg,#d2a34f,#f1d18a,#c3933f);
+      z-index:5;
+      border-radius:2px;
     }
+
     .ribbon-h{
-      position:absolute;left:2px;right:2px;top:48px;height:12px;
-      background:linear-gradient(90deg,#c39240,#efd087,#bd8c38);z-index:5
+      position:absolute;
+      left:2px;
+      right:2px;
+      top:48px;
+      height:12px;
+      background:linear-gradient(90deg,#c39240,#efd087,#bd8c38);
+      z-index:5;
     }
-    .bow{position:absolute;top:5px;left:50%;width:68px;height:44px;transform:translateX(-50%);z-index:7}
+
+    .bow{
+      position:absolute;
+      top:5px;
+      left:50%;
+      width:68px;
+      height:44px;
+      transform:translateX(-50%);
+      z-index:7;
+    }
+
     .bow:before,.bow:after{
-      content:"";position:absolute;top:10px;width:38px;height:28px;
-      background:var(--gold);border:2px solid #b48335;
+      content:"";
+      position:absolute;
+      top:10px;
+      width:38px;
+      height:28px;
+      background:var(--gold);
+      border:2px solid #b48335;
       border-radius:80% 15% 70% 20%;
     }
-    .bow:before{right:31px;transform:rotate(28deg)}
-    .bow:after{left:31px;transform:scaleX(-1) rotate(28deg)}
-    .knot{position:absolute;left:50%;top:18px;width:18px;height:18px;transform:translateX(-50%);
-      background:#e9c875;border-radius:50%;z-index:8}
-    .gift-button:hover .gift{animation-play-state:paused;transform:scale(1.03)}
-    .gift-button:focus-visible{outline:2px solid var(--gold-light);outline-offset:10px;border-radius:20px}
+
+    .bow:before{
+      right:31px;
+      transform:rotate(28deg);
+    }
+
+    .bow:after{
+      left:31px;
+      transform:scaleX(-1) rotate(28deg);
+    }
+
+    .knot{
+      position:absolute;
+      left:50%;
+      top:18px;
+      width:18px;
+      height:18px;
+      transform:translateX(-50%);
+      background:#e9c875;
+      border-radius:50%;
+      z-index:8;
+    }
+
+    .gift-button:hover .gift{
+      animation-play-state:paused;
+      transform:scale(1.03);
+    }
+
+    .gift-button:focus-visible{
+      outline:2px solid var(--gold-light);
+      outline-offset:10px;
+      border-radius:20px;
+    }
+
     .open-label{
-      font-family:Arial,sans-serif;font-size:.8rem;letter-spacing:.15em;
-      text-transform:uppercase;color:#fff
+      font-family:Arial,sans-serif;
+      font-size:.8rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      color:#fff;
     }
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 
-    /* SURPRISE */
-    #surprise{display:none;background:var(--cream);color:var(--ink);padding:0;align-items:stretch}
-    #surprise.show{display:block;animation:reveal .9s ease both}
-    @keyframes reveal{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
-    .hero{min-height:100svh;position:relative;display:flex;align-items:flex-end;overflow:hidden}
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-9px)}
+    }
+
+    /* =========================
+       PAGE SURPRISE
+       ========================= */
+
+    #surprise{
+      display:none;
+      background:var(--cream);
+      color:var(--ink);
+      padding:0;
+      align-items:stretch;
+    }
+
+    #surprise.show{
+      display:block;
+      animation:reveal .9s ease both;
+    }
+
+    @keyframes reveal{
+      from{opacity:0;transform:translateY(25px)}
+      to{opacity:1;transform:none}
+    }
+
+    .hero{
+      min-height:100svh;
+      position:relative;
+      display:flex;
+      align-items:flex-end;
+      overflow:hidden;
+    }
+
+    /*
+      Image locale :
+      le fichier Hotel.png doit être placé à côté de index.html
+    */
     .hero-photo{
-      position:absolute;inset:0;background:
-        linear-gradient(to top,rgba(19,14,18,.82),rgba(19,14,18,.08) 65%),
-        url("Hotel.png")
-        center/cover no-repeat;
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(
+          to top,
+          rgba(19,14,18,.82),
+          rgba(19,14,18,.08) 65%
+        ),
+        url("Hotel.png") center center / cover no-repeat;
     }
-    .hero-content{position:relative;z-index:2;color:white;width:min(950px,100%);margin:auto;padding:70px 24px 42px;text-align:center}
-    .tiny{font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:.25em;font-size:.68rem;color:#f5dbab}
-    .hero h2{font-size:clamp(3rem,11vw,6.5rem);font-weight:400;line-height:.9;margin:15px 0}
-    .hero p{font-size:clamp(1rem,3vw,1.25rem);margin:0 auto;max-width:650px;color:#f5eef1}
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      color:white;
+      width:min(950px,100%);
+      margin:auto;
+      padding:70px 24px 42px;
+      text-align:center;
+    }
+
+    .tiny{
+      font-family:Arial,sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.25em;
+      font-size:.68rem;
+      color:#f5dbab;
+    }
+
+    .hero h2{
+      font-size:clamp(3rem,11vw,6.5rem);
+      font-weight:400;
+      line-height:.9;
+      margin:15px 0;
+    }
+
+    .hero p{
+      font-size:clamp(1rem,3vw,1.25rem);
+      margin:0 auto;
+      max-width:650px;
+      color:#f5eef1;
+    }
+
     .scroll{
-      display:inline-block;margin-top:35px;border:1px solid rgba(255,255,255,.45);
-      padding:11px 17px;border-radius:999px;color:white;text-decoration:none;
-      font-family:Arial,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase
+      display:inline-block;
+      margin-top:35px;
+      border:1px solid rgba(255,255,255,.45);
+      padding:11px 17px;
+      border-radius:999px;
+      color:white;
+      text-decoration:none;
+      font-family:Arial,sans-serif;
+      font-size:.72rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
     }
 
-    .details{padding:70px 18px 90px;background:var(--cream)}
-    .details-inner{max-width:900px;margin:auto}
-    .section-kicker{text-align:center;color:#9a6c26;font-family:Arial,sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase}
-    .details h3{text-align:center;font-size:clamp(2rem,7vw,3.2rem);font-weight:400;margin:10px 0 40px}
+    /* =========================
+       INFORMATIONS RÉSERVATION
+       ========================= */
+
+    .details{
+      padding:70px 18px 90px;
+      background:var(--cream);
+    }
+
+    .details-inner{
+      max-width:900px;
+      margin:auto;
+    }
+
+    .section-kicker{
+      text-align:center;
+      color:#9a6c26;
+      font-family:Arial,sans-serif;
+      font-size:.7rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+    }
+
+    .details h3{
+      text-align:center;
+      font-size:clamp(2rem,7vw,3.2rem);
+      font-weight:400;
+      margin:10px 0 40px;
+    }
+
     .booking{
-      background:white;border-radius:24px;box-shadow:0 18px 50px rgba(57,39,28,.12);
-      overflow:hidden;border:1px solid #eee2d2
+      background:white;
+      border-radius:24px;
+      box-shadow:0 18px 50px rgba(57,39,28,.12);
+      overflow:hidden;
+      border:1px solid #eee2d2;
     }
-    .booking-top{padding:28px;border-bottom:1px solid #eee2d2;display:flex;justify-content:space-between;gap:20px;align-items:center}
-    .hotel-name{font-size:1.45rem}
-    .location{font-family:Arial,sans-serif;font-size:.78rem;color:#8c7b80;margin-top:6px}
-    .badge{font-family:Arial,sans-serif;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
-      color:#6b4a16;background:#f8edcf;border-radius:999px;padding:9px 12px;white-space:nowrap}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr)}
-    .item{padding:24px 28px;border-bottom:1px solid #eee2d2}
-    .item:nth-child(odd){border-right:1px solid #eee2d2}
-    .label{font-family:Arial,sans-serif;font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:#9a8b8e;margin-bottom:7px}
-    .value{font-size:1.05rem}
+
+    .booking-top{
+      padding:28px;
+      border-bottom:1px solid #eee2d2;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      align-items:center;
+    }
+
+    .hotel-name{
+      font-size:1.45rem;
+    }
+
+    .hotel-name a,
+    .location a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .hotel-name a:hover,
+    .location a:hover{
+      text-decoration:underline;
+    }
+
+    .location{
+      font-family:Arial,sans-serif;
+      font-size:.78rem;
+      color:#8c7b80;
+      margin-top:6px;
+    }
+
+    .badge{
+      font-family:Arial,sans-serif;
+      font-size:.68rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:#6b4a16;
+      background:#f8edcf;
+      border-radius:999px;
+      padding:9px 12px;
+      white-space:nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+    }
+
+    .item{
+      padding:24px 28px;
+      border-bottom:1px solid #eee2d2;
+    }
+
+    .item:nth-child(odd){
+      border-right:1px solid #eee2d2;
+    }
+
+    .label{
+      font-family:Arial,sans-serif;
+      font-size:.68rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:#9a8b8e;
+      margin-bottom:7px;
+    }
+
+    .value{
+      font-size:1.05rem;
+    }
+
     .message{
-      text-align:center;padding:48px 24px 10px;font-size:1.3rem;line-height:1.7
+      text-align:center;
+      padding:48px 24px 10px;
+      font-size:1.3rem;
+      line-height:1.7;
     }
-    .signature{text-align:center;padding:20px 24px 50px;font-style:italic;color:#80666d}
+
+    .signature{
+      text-align:center;
+      padding:20px 24px 50px;
+      font-style:italic;
+      color:#80666d;
+    }
+
     .edit-note{
-      max-width:700px;margin:25px auto 0;text-align:center;
-      color:#8a777c;font:12px/1.5 Arial,sans-serif
+      max-width:700px;
+      margin:25px auto 0;
+      text-align:center;
+      color:#8a777c;
+      font:12px/1.5 Arial,sans-serif;
     }
 
-    /* CONFETTIS */
-    .confetti{position:fixed;z-index:100;top:-20px;width:8px;height:14px;opacity:0;pointer-events:none}
-    .confetti.go{animation:fall 2.7s linear forwards}
-    @keyframes fall{0%{transform:translate3d(0,-10px,0) rotate(0);opacity:1}100%{transform:translate3d(var(--x),110vh,0) rotate(720deg);opacity:0}}
+    /* =========================
+       CONFETTIS
+       ========================= */
 
-    @media(max-width:600px){
-      .gift{width:155px;height:132px}
-      .gift-box{height:92px}.gift-lid{top:30px}.ribbon-v{top:30px}.ribbon-h{top:43px}
-      .booking-top{align-items:flex-start;flex-direction:column}
-      .grid{grid-template-columns:1fr}
-      .item:nth-child(odd){border-right:0}
-      .item{padding:20px 22px}
-      .hero-content{padding-bottom:34px}
+    .confetti{
+      position:fixed;
+      z-index:100;
+      top:-20px;
+      width:8px;
+      height:14px;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .confetti.go{
+      animation:fall 2.7s linear forwards;
+    }
+
+    @keyframes fall{
+      0%{
+        transform:translate3d(0,-10px,0) rotate(0);
+        opacity:1;
+      }
+      100%{
+        transform:translate3d(var(--x),110vh,0) rotate(720deg);
+        opacity:0;
+      }
+    }
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width:600px){
+
+      .gift{
+        width:155px;
+        height:132px;
+      }
+
+      .gift-box{
+        height:92px;
+      }
+
+      .gift-lid{
+        top:30px;
+      }
+
+      .ribbon-v{
+        top:30px;
+      }
+
+      .ribbon-h{
+        top:43px;
+      }
+
+      .hero{
+        min-height:100svh;
+      }
+
+      /*
+        Recadrage spécifique mobile.
+        L'image horizontale est légèrement repositionnée
+        afin de garder la partie centrale de la chambre visible.
+      */
+      .hero-photo{
+        background-position:50% 38%;
+        background-size:cover;
+      }
+
+      .hero-content{
+        padding:70px 20px 34px;
+      }
+
+      .hero h2{
+        font-size:clamp(3rem,16vw,5rem);
+      }
+
+      .booking-top{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .item:nth-child(odd){
+        border-right:0;
+      }
+
+      .item{
+        padding:20px 22px;
+      }
+
+      .badge{
+        white-space:normal;
+      }
+    }
+
+    /* Très petits téléphones */
+    @media (max-width:400px){
+      .hero-photo{
+        background-position:50% 35%;
+      }
+
+      .hero-content{
+        padding-left:16px;
+        padding-right:16px;
+      }
     }
   </style>
 </head>
+
 <body>
+
+  <!-- =========================
+       CADEAU
+       ========================= -->
 
   <main id="intro" class="screen">
     <div class="intro-content">
-      <div class="eyebrow">Une surprise t'attend</div>
-      <h1>Nous avons un cadeau<br>pour toi...</h1>
-      <p class="intro-sub">Ouvre moi 🎁</p>
 
-      <button class="gift-button" id="openGift" aria-label="Ouvrir le cadeau">
+      <div class="eyebrow">Une surprise t'attend</div>
+
+      <h1>
+        Nous avons un cadeau<br>
+        pour toi...
+      </h1>
+
+      <p class="intro-sub">
+        Ouvre moi 🎁
+      </p>
+
+      <button
+        class="gift-button"
+        id="openGift"
+        aria-label="Ouvrir le cadeau"
+      >
         <div class="gift" aria-hidden="true">
-          <div class="bow"><div class="knot"></div></div>
+
+          <div class="bow">
+            <div class="knot"></div>
+          </div>
+
           <div class="gift-lid" id="lid"></div>
+
           <div class="gift-box"></div>
+
           <div class="ribbon-h"></div>
           <div class="ribbon-v"></div>
+
         </div>
-        <span class="open-label">Ouvrir le cadeau</span>
+
+        <span class="open-label">
+          Ouvrir le cadeau
+        </span>
       </button>
+
     </div>
   </main>
 
+
+  <!-- =========================
+       SURPRISE
+       ========================= -->
+
   <main id="surprise">
+
     <section class="hero">
-      <div class="hero-photo" role="img" aria-label="Hotel.png"></div>
+
+      <div
+        class="hero-photo"
+        role="img"
+        aria-label="Photo de la chambre d'hôtel"
+      ></div>
+
       <div class="hero-content">
-        <div class="tiny">La surprise est ouverte</div>
-        <h2>Joyeux<br>anniversaire !</h2>
-        <p>Prépare ta valise… une jolie parenthèse à l'hôtel t'attend. ✨</p>
-        <a class="scroll" href="#reservation">Découvrir la réservation ↓</a>
+
+        <div class="tiny">
+          La surprise est ouverte
+        </div>
+
+        <h2>
+          Joyeux<br>
+          anniversaire !
+        </h2>
+
+        <p>
+          Prépare ta valise… une jolie parenthèse à l'hôtel t'attend. ✨
+        </p>
+
+        <a
+          class="scroll"
+          href="#reservation"
+        >
+          Découvrir la réservation ↓
+        </a>
+
       </div>
+
     </section>
 
+
+    <!-- =========================
+         RÉSERVATION
+         ========================= -->
+
     <section class="details" id="reservation">
+
       <div class="details-inner">
-        <div class="section-kicker">Ton cadeau</div>
-        <h3>Une escapade rien que pour toi</h3>
+
+        <div class="section-kicker">
+          Ton cadeau
+        </div>
+
+        <h3>
+          Une escapade rien que pour toi
+        </h3>
+
 
         <div class="booking">
+
           <div class="booking-top">
-           <div>
-  <div class="hotel-name">
-    <a href="https://maps.app.goo.gl/2TXeJBDQ569CgrdN6" target="_blank" rel="noopener noreferrer">
-      Hôtel Kyriad
-    </a>
-  </div>
-  <div class="location">
-    <a href="https://maps.app.goo.gl/2TXeJBDQ569CgrdN6" target="_blank" rel="noopener noreferrer">
-      134-136 Avenue De La Division Leclerc, 93350 Le Bourget
-    </a>
-  </div>
-</div>
-            <div class="badge">Réservation confirmée</div>
+
+            <div>
+
+              <div class="hotel-name">
+                <a
+                  href="https://maps.app.goo.gl/2TXeJBDQ569CgrdN6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Hôtel Kyriad
+                </a>
+              </div>
+
+              <div class="location">
+                <a
+                  href="https://maps.app.goo.gl/2TXeJBDQ569CgrdN6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  134-136 Avenue De La Division Leclerc,
+                  93350 Le Bourget
+                </a>
+              </div>
+
+            </div>
+
+            <div class="badge">
+              Réservation confirmée
+            </div>
+
           </div>
+
 
           <div class="grid">
+
             <div class="item">
               <div class="label">Arrivée</div>
-              <div class="value">Mardi 6 octobre 2026 - 14h</div>
+              <div class="value">
+                Mardi 6 octobre 2026 - 14h
+              </div>
             </div>
+
             <div class="item">
               <div class="label">Départ</div>
-              <div class="value">Mercredi 7 octobre 2026 - 12h</div>
+              <div class="value">
+                Mercredi 7 octobre 2026 - 12h
+              </div>
             </div>
+
             <div class="item">
               <div class="label">Chambre</div>
-              <div class="value">Chambre Standard - Lit Double</div>
+              <div class="value">
+                Chambre Standard - Lit Double
+              </div>
             </div>
+
             <div class="item">
               <div class="label">Pour</div>
-              <div class="value">2 personnes</div>
+              <div class="value">
+                2 personnes
+              </div>
             </div>
+
             <div class="item">
               <div class="label">Numéro de réservation</div>
-              <div class="value">Voir avec Marie</div>
+              <div class="value">
+                Voir avec Marie
+              </div>
             </div>
+
             <div class="item">
               <div class="label">Petit-déjeuner</div>
-              <div class="value">Inclus ☕ (croissant, poulet)</div>
+              <div class="value">
+                Inclus ☕ (croissant, poulet)
+              </div>
             </div>
+
           </div>
 
+
+          <div class="message">
+
+            Parce que tu mérites un anniversaire
+            rempli de beaux souvenirs,
+
+            <br>
+
+            <strong>
+              profite bien de cette petite escapade ❤️
+            </strong>
+
+          </div>
+
+          <div class="signature">
+            Avec tout mon amour
+          </div>
+
+        </div>
+
+
+        <p class="edit-note">
+          Clique sur le nom ou l'adresse de l'hôtel
+          pour ouvrir Google Maps.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       JAVASCRIPT
+       ========================= -->
+
   <script>
+
     const openGift = document.getElementById('openGift');
     const lid = document.getElementById('lid');
     const intro = document.getElementById('intro');
     const surprise = document.getElementById('surprise');
 
-    function confettiBurst() {
+
+    function confettiBurst(){
+
       const pieces = 90;
-      for (let i = 0; i < pieces; i++) {
+
+      for(let i = 0; i < pieces; i++){
+
         const c = document.createElement('i');
+
         c.className = 'confetti go';
-        c.style.left = (Math.random() * 100) + 'vw';
-        c.style.setProperty('--x', ((Math.random() - .5) * 35) + 'vw');
-        c.style.animationDelay = (Math.random() * .45) + 's';
-        c.style.background = ['#d7ad63','#f2d39a','#a83a5c','#fff8ee','#8b5670'][i % 5];
-        c.style.transform = `rotate(${Math.random()*360}deg)`;
+
+        c.style.left =
+          (Math.random() * 100) + 'vw';
+
+        c.style.setProperty(
+          '--x',
+          ((Math.random() - .5) * 35) + 'vw'
+        );
+
+        c.style.animationDelay =
+          (Math.random() * .45) + 's';
+
+        c.style.background =
+          [
+            '#d7ad63',
+            '#f2d39a',
+            '#a83a5c',
+            '#fff8ee',
+            '#8b5670'
+          ][i % 5];
+
+        c.style.transform =
+          `rotate(${Math.random() * 360}deg)`;
+
         document.body.appendChild(c);
-        setTimeout(() => c.remove(), 3400);
+
+        setTimeout(
+          () => c.remove(),
+          3400
+        );
       }
     }
 
+
     openGift.addEventListener('click', () => {
+
       openGift.disabled = true;
-      lid.style.transform = 'translateY(-55px) rotate(-12deg)';
+
+      lid.style.transform =
+        'translateY(-55px) rotate(-12deg)';
+
       lid.style.top = '10px';
 
+
       setTimeout(() => {
+
         intro.classList.add('hidden');
+
         surprise.classList.add('show');
-        window.scrollTo({top:0, behavior:'instant'});
+
+        window.scrollTo({
+          top:0,
+          behavior:'instant'
+        });
+
         confettiBurst();
+
       }, 650);
+
     });
+
   </script>
+
 </body>
 </html>
