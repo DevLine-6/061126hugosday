@@ -476,84 +476,21 @@
        MOBILE
        ========================= */
 
-    @media (max-width:400px){
+@media (max-width: 600px){
 
-      .gift{
-        width:155px;
-        height:132px;
-      }
+  .hero{
+    min-height:100svh;
+    background:#19151a;
+  }
 
-      .gift-box{
-        height:92px;
-      }
-
-      .gift-lid{
-        top:30px;
-      }
-
-      .ribbon-v{
-        top:30px;
-      }
-
-      .ribbon-h{
-        top:43px;
-      }
-
-      .hero{
-        min-height:100svh;
-      }
-
-      /*
-        Recadrage spécifique mobile.
-        L'image horizontale est légèrement repositionnée
-        afin de garder la partie centrale de la chambre visible.
-      */
-      .hero-photo{
-        background-position:30% 38%;
-        background-size:cover;
-      }
-
-      .hero-content{
-        padding:50px 20px 34px;
-      }
-
-      .hero h2{
-        font-size:clamp(3rem,16vw,5rem);
-      }
-
-      .booking-top{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .grid{
-        grid-template-columns:1fr;
-      }
-
-      .item:nth-child(odd){
-        border-right:0;
-      }
-
-      .item{
-        padding:20px 22px;
-      }
-
-      .badge{
-        white-space:normal;
-      }
-    }
-
-    /* Très petits téléphones */
-    @media (max-width:400px){
-      .hero-photo{
-        background-position:50% 35%;
-      }
-
-      .hero-content{
-        padding-left:16px;
-        padding-right:16px;
-      }
-    }
+  .hero-photo{
+    inset:0;
+    background-size:contain;
+    background-position:center 20%;
+    background-repeat:no-repeat;
+    background-color:#19151a;
+  }
+}
   </style>
 </head>
 
